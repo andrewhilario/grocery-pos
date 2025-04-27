@@ -1,19 +1,39 @@
-"use client"
+/* eslint-disable react/no-unescaped-entities */
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import DashboardLayout from "@/components/dashboard-layout"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Switch } from "@/components/ui/switch"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
-import { Building, CreditCard, Printer, Receipt, Settings2, ShieldCheck } from "lucide-react"
+import { useState } from "react";
+import DashboardLayout from "@/components/dashboard-layout";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import {
+  Building,
+  CreditCard,
+  Printer,
+  Receipt,
+  Settings2,
+  ShieldCheck
+} from "lucide-react";
 
 export default function SettingsPage() {
   const [storeSettings, setStoreSettings] = useState({
@@ -21,8 +41,8 @@ export default function SettingsPage() {
     address: "1234 Main St, Anytown, CA 12345",
     phone: "(555) 123-4567",
     email: "info@grocerystore.com",
-    taxId: "12-3456789",
-  })
+    taxId: "12-3456789"
+  });
 
   const [receiptSettings, setReceiptSettings] = useState({
     headerText: "Thank you for shopping with us!",
@@ -31,8 +51,8 @@ export default function SettingsPage() {
     showTaxId: true,
     printDuplicate: false,
     receiptWidth: "80mm",
-    fontSize: "normal",
-  })
+    fontSize: "normal"
+  });
 
   const [taxSettings, setTaxSettings] = useState({
     defaultTaxRate: "7.00",
@@ -40,9 +60,9 @@ export default function SettingsPage() {
     taxCategories: [
       { id: 1, name: "Standard", rate: "7.00" },
       { id: 2, name: "Food", rate: "0.00" },
-      { id: 3, name: "Alcohol", rate: "10.00" },
-    ],
-  })
+      { id: 3, name: "Alcohol", rate: "10.00" }
+    ]
+  });
 
   const [paymentSettings, setPaymentSettings] = useState({
     acceptCash: true,
@@ -51,32 +71,39 @@ export default function SettingsPage() {
     acceptChecks: false,
     acceptGiftCards: true,
     requireSignature: true,
-    signatureThreshold: "25.00",
-  })
+    signatureThreshold: "25.00"
+  });
 
-  const handleStoreSettingsChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setStoreSettings((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleStoreSettingsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setStoreSettings((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleReceiptSettingsChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement
-    const newValue = type === "checkbox" ? (e.target as HTMLInputElement).checked : value
-    setReceiptSettings((prev) => ({ ...prev, [name]: newValue }))
-  }
+  const handleReceiptSettingsChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = e.target;
+    const newValue =
+      type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
+    setReceiptSettings((prev) => ({ ...prev, [name]: newValue }));
+  };
 
   const handleReceiptToggleChange = (name: string, checked: boolean) => {
-    setReceiptSettings((prev) => ({ ...prev, [name]: checked }))
-  }
+    setReceiptSettings((prev) => ({ ...prev, [name]: checked }));
+  };
 
   const handlePaymentToggleChange = (name: string, checked: boolean) => {
-    setPaymentSettings((prev) => ({ ...prev, [name]: checked }))
-  }
+    setPaymentSettings((prev) => ({ ...prev, [name]: checked }));
+  };
 
   const handleSaveSettings = () => {
     // In a real app, this would save to the database
-    alert("Settings saved successfully!")
-  }
+    alert("Settings saved successfully!");
+  };
 
   return (
     <DashboardLayout>
@@ -110,7 +137,9 @@ export default function SettingsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Store Information</CardTitle>
-                <CardDescription>Manage your store details and contact information</CardDescription>
+                <CardDescription>
+                  Manage your store details and contact information
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -125,7 +154,12 @@ export default function SettingsPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="taxId">Tax ID / Business Number</Label>
-                    <Input id="taxId" name="taxId" value={storeSettings.taxId} onChange={handleStoreSettingsChange} />
+                    <Input
+                      id="taxId"
+                      name="taxId"
+                      value={storeSettings.taxId}
+                      onChange={handleStoreSettingsChange}
+                    />
                   </div>
                 </div>
 
@@ -142,11 +176,21 @@ export default function SettingsPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" name="phone" value={storeSettings.phone} onChange={handleStoreSettingsChange} />
+                    <Input
+                      id="phone"
+                      name="phone"
+                      value={storeSettings.phone}
+                      onChange={handleStoreSettingsChange}
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" name="email" value={storeSettings.email} onChange={handleStoreSettingsChange} />
+                    <Input
+                      id="email"
+                      name="email"
+                      value={storeSettings.email}
+                      onChange={handleStoreSettingsChange}
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -155,7 +199,9 @@ export default function SettingsPage() {
             <Card className="mt-6">
               <CardHeader>
                 <CardTitle>Tax Settings</CardTitle>
-                <CardDescription>Configure tax rates and exemptions</CardDescription>
+                <CardDescription>
+                  Configure tax rates and exemptions
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -166,7 +212,12 @@ export default function SettingsPage() {
                       type="number"
                       step="0.01"
                       value={taxSettings.defaultTaxRate}
-                      onChange={(e) => setTaxSettings((prev) => ({ ...prev, defaultTaxRate: e.target.value }))}
+                      onChange={(e) =>
+                        setTaxSettings((prev) => ({
+                          ...prev,
+                          defaultTaxRate: e.target.value
+                        }))
+                      }
                     />
                   </div>
                   <div className="space-y-2 flex items-center">
@@ -175,10 +226,15 @@ export default function SettingsPage() {
                         id="enableTaxExemption"
                         checked={taxSettings.enableTaxExemption}
                         onCheckedChange={(checked) =>
-                          setTaxSettings((prev) => ({ ...prev, enableTaxExemption: checked }))
+                          setTaxSettings((prev) => ({
+                            ...prev,
+                            enableTaxExemption: checked
+                          }))
                         }
                       />
-                      <Label htmlFor="enableTaxExemption">Enable Tax Exemption</Label>
+                      <Label htmlFor="enableTaxExemption">
+                        Enable Tax Exemption
+                      </Label>
                     </div>
                   </div>
                 </div>
@@ -189,7 +245,10 @@ export default function SettingsPage() {
                   <h3 className="text-sm font-medium mb-3">Tax Categories</h3>
                   <div className="space-y-2">
                     {taxSettings.taxCategories.map((category) => (
-                      <div key={category.id} className="flex items-center space-x-4">
+                      <div
+                        key={category.id}
+                        className="flex items-center space-x-4"
+                      >
                         <div className="flex-1">{category.name}</div>
                         <div className="w-24">
                           <Input
@@ -197,10 +256,16 @@ export default function SettingsPage() {
                             step="0.01"
                             value={category.rate}
                             onChange={(e) => {
-                              const newCategories = taxSettings.taxCategories.map((c) =>
-                                c.id === category.id ? { ...c, rate: e.target.value } : c,
-                              )
-                              setTaxSettings((prev) => ({ ...prev, taxCategories: newCategories }))
+                              const newCategories =
+                                taxSettings.taxCategories.map((c) =>
+                                  c.id === category.id
+                                    ? { ...c, rate: e.target.value }
+                                    : c
+                                );
+                              setTaxSettings((prev) => ({
+                                ...prev,
+                                taxCategories: newCategories
+                              }));
                             }}
                           />
                         </div>
@@ -217,7 +282,9 @@ export default function SettingsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Receipt Customization</CardTitle>
-                <CardDescription>Customize how receipts are printed and displayed</CardDescription>
+                <CardDescription>
+                  Customize how receipts are printed and displayed
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -249,27 +316,39 @@ export default function SettingsPage() {
                         <Switch
                           id="showLogo"
                           checked={receiptSettings.showLogo}
-                          onCheckedChange={(checked) => handleReceiptToggleChange("showLogo", checked)}
+                          onCheckedChange={(checked) =>
+                            handleReceiptToggleChange("showLogo", checked)
+                          }
                         />
-                        <Label htmlFor="showLogo">Show Store Logo on Receipt</Label>
+                        <Label htmlFor="showLogo">
+                          Show Store Logo on Receipt
+                        </Label>
                       </div>
 
                       <div className="flex items-center space-x-2">
                         <Switch
                           id="showTaxId"
                           checked={receiptSettings.showTaxId}
-                          onCheckedChange={(checked) => handleReceiptToggleChange("showTaxId", checked)}
+                          onCheckedChange={(checked) =>
+                            handleReceiptToggleChange("showTaxId", checked)
+                          }
                         />
-                        <Label htmlFor="showTaxId">Show Tax ID on Receipt</Label>
+                        <Label htmlFor="showTaxId">
+                          Show Tax ID on Receipt
+                        </Label>
                       </div>
 
                       <div className="flex items-center space-x-2">
                         <Switch
                           id="printDuplicate"
                           checked={receiptSettings.printDuplicate}
-                          onCheckedChange={(checked) => handleReceiptToggleChange("printDuplicate", checked)}
+                          onCheckedChange={(checked) =>
+                            handleReceiptToggleChange("printDuplicate", checked)
+                          }
                         />
-                        <Label htmlFor="printDuplicate">Print Duplicate Receipt</Label>
+                        <Label htmlFor="printDuplicate">
+                          Print Duplicate Receipt
+                        </Label>
                       </div>
                     </div>
 
@@ -277,7 +356,12 @@ export default function SettingsPage() {
                       <Label htmlFor="receiptWidth">Receipt Width</Label>
                       <Select
                         value={receiptSettings.receiptWidth}
-                        onValueChange={(value) => setReceiptSettings((prev) => ({ ...prev, receiptWidth: value }))}
+                        onValueChange={(value) =>
+                          setReceiptSettings((prev) => ({
+                            ...prev,
+                            receiptWidth: value
+                          }))
+                        }
                       >
                         <SelectTrigger id="receiptWidth">
                           <SelectValue placeholder="Select width" />
@@ -294,7 +378,12 @@ export default function SettingsPage() {
                       <Label htmlFor="fontSize">Font Size</Label>
                       <Select
                         value={receiptSettings.fontSize}
-                        onValueChange={(value) => setReceiptSettings((prev) => ({ ...prev, fontSize: value }))}
+                        onValueChange={(value) =>
+                          setReceiptSettings((prev) => ({
+                            ...prev,
+                            fontSize: value
+                          }))
+                        }
                       >
                         <SelectTrigger id="fontSize">
                           <SelectValue placeholder="Select font size" />
@@ -323,18 +412,24 @@ export default function SettingsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Payment Methods</CardTitle>
-                <CardDescription>Configure accepted payment methods and settings</CardDescription>
+                <CardDescription>
+                  Configure accepted payment methods and settings
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
-                    <h3 className="text-sm font-medium">Accepted Payment Methods</h3>
+                    <h3 className="text-sm font-medium">
+                      Accepted Payment Methods
+                    </h3>
                     <div className="space-y-3">
                       <div className="flex items-center space-x-2">
                         <Switch
                           id="acceptCash"
                           checked={paymentSettings.acceptCash}
-                          onCheckedChange={(checked) => handlePaymentToggleChange("acceptCash", checked)}
+                          onCheckedChange={(checked) =>
+                            handlePaymentToggleChange("acceptCash", checked)
+                          }
                         />
                         <Label htmlFor="acceptCash">Cash</Label>
                       </div>
@@ -343,7 +438,12 @@ export default function SettingsPage() {
                         <Switch
                           id="acceptCreditCards"
                           checked={paymentSettings.acceptCreditCards}
-                          onCheckedChange={(checked) => handlePaymentToggleChange("acceptCreditCards", checked)}
+                          onCheckedChange={(checked) =>
+                            handlePaymentToggleChange(
+                              "acceptCreditCards",
+                              checked
+                            )
+                          }
                         />
                         <Label htmlFor="acceptCreditCards">Credit Cards</Label>
                       </div>
@@ -352,7 +452,12 @@ export default function SettingsPage() {
                         <Switch
                           id="acceptDebitCards"
                           checked={paymentSettings.acceptDebitCards}
-                          onCheckedChange={(checked) => handlePaymentToggleChange("acceptDebitCards", checked)}
+                          onCheckedChange={(checked) =>
+                            handlePaymentToggleChange(
+                              "acceptDebitCards",
+                              checked
+                            )
+                          }
                         />
                         <Label htmlFor="acceptDebitCards">Debit Cards</Label>
                       </div>
@@ -361,7 +466,9 @@ export default function SettingsPage() {
                         <Switch
                           id="acceptChecks"
                           checked={paymentSettings.acceptChecks}
-                          onCheckedChange={(checked) => handlePaymentToggleChange("acceptChecks", checked)}
+                          onCheckedChange={(checked) =>
+                            handlePaymentToggleChange("acceptChecks", checked)
+                          }
                         />
                         <Label htmlFor="acceptChecks">Checks</Label>
                       </div>
@@ -370,7 +477,12 @@ export default function SettingsPage() {
                         <Switch
                           id="acceptGiftCards"
                           checked={paymentSettings.acceptGiftCards}
-                          onCheckedChange={(checked) => handlePaymentToggleChange("acceptGiftCards", checked)}
+                          onCheckedChange={(checked) =>
+                            handlePaymentToggleChange(
+                              "acceptGiftCards",
+                              checked
+                            )
+                          }
                         />
                         <Label htmlFor="acceptGiftCards">Gift Cards</Label>
                       </div>
@@ -378,31 +490,46 @@ export default function SettingsPage() {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-sm font-medium">Card Payment Settings</h3>
+                    <h3 className="text-sm font-medium">
+                      Card Payment Settings
+                    </h3>
                     <div className="space-y-3">
                       <div className="flex items-center space-x-2">
                         <Switch
                           id="requireSignature"
                           checked={paymentSettings.requireSignature}
-                          onCheckedChange={(checked) => handlePaymentToggleChange("requireSignature", checked)}
+                          onCheckedChange={(checked) =>
+                            handlePaymentToggleChange(
+                              "requireSignature",
+                              checked
+                            )
+                          }
                         />
-                        <Label htmlFor="requireSignature">Require Signature</Label>
+                        <Label htmlFor="requireSignature">
+                          Require Signature
+                        </Label>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="signatureThreshold">Signature Threshold ($)</Label>
+                        <Label htmlFor="signatureThreshold">
+                          Signature Threshold ($)
+                        </Label>
                         <Input
                           id="signatureThreshold"
                           type="number"
                           step="0.01"
                           value={paymentSettings.signatureThreshold}
                           onChange={(e) =>
-                            setPaymentSettings((prev) => ({ ...prev, signatureThreshold: e.target.value }))
+                            setPaymentSettings((prev) => ({
+                              ...prev,
+                              signatureThreshold: e.target.value
+                            }))
                           }
                           disabled={!paymentSettings.requireSignature}
                         />
                         <p className="text-sm text-gray-500">
-                          Signatures will be required for transactions above this amount
+                          Signatures will be required for transactions above
+                          this amount
                         </p>
                       </div>
                     </div>
@@ -416,7 +543,9 @@ export default function SettingsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>System Settings</CardTitle>
-                <CardDescription>Configure system behavior and security settings</CardDescription>
+                <CardDescription>
+                  Configure system behavior and security settings
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -425,22 +554,34 @@ export default function SettingsPage() {
                     <div className="space-y-3">
                       <div className="flex items-center space-x-2">
                         <Switch id="requirePasswordForRefunds" defaultChecked />
-                        <Label htmlFor="requirePasswordForRefunds">Require Password for Refunds</Label>
+                        <Label htmlFor="requirePasswordForRefunds">
+                          Require Password for Refunds
+                        </Label>
                       </div>
 
                       <div className="flex items-center space-x-2">
                         <Switch id="requirePasswordForVoids" defaultChecked />
-                        <Label htmlFor="requirePasswordForVoids">Require Password for Voids</Label>
+                        <Label htmlFor="requirePasswordForVoids">
+                          Require Password for Voids
+                        </Label>
                       </div>
 
                       <div className="flex items-center space-x-2">
                         <Switch id="autoLogout" defaultChecked />
-                        <Label htmlFor="autoLogout">Auto Logout After Inactivity</Label>
+                        <Label htmlFor="autoLogout">
+                          Auto Logout After Inactivity
+                        </Label>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="inactivityTimeout">Inactivity Timeout (minutes)</Label>
-                        <Input id="inactivityTimeout" type="number" defaultValue="15" />
+                        <Label htmlFor="inactivityTimeout">
+                          Inactivity Timeout (minutes)
+                        </Label>
+                        <Input
+                          id="inactivityTimeout"
+                          type="number"
+                          defaultValue="15"
+                        />
                       </div>
                     </div>
                   </div>
@@ -450,7 +591,9 @@ export default function SettingsPage() {
                     <div className="space-y-3">
                       <div className="flex items-center space-x-2">
                         <Switch id="autoBackup" defaultChecked />
-                        <Label htmlFor="autoBackup">Automatic Daily Backup</Label>
+                        <Label htmlFor="autoBackup">
+                          Automatic Daily Backup
+                        </Label>
                       </div>
 
                       <div className="space-y-2">
@@ -480,7 +623,9 @@ export default function SettingsPage() {
                 <Separator className="my-2" />
 
                 <div>
-                  <h3 className="text-sm font-medium mb-3">System Maintenance</h3>
+                  <h3 className="text-sm font-medium mb-3">
+                    System Maintenance
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <Button variant="outline">Clear Transaction Cache</Button>
                     <Button variant="outline">Rebuild Search Index</Button>
@@ -493,5 +638,5 @@ export default function SettingsPage() {
         </Tabs>
       </div>
     </DashboardLayout>
-  )
+  );
 }
